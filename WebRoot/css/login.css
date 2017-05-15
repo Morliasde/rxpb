@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+/*border: 1px solid black;*/
+/*background:red;*/
+.loginForm{
+	width:400px;
+	margin :10 auto 100 auto;
+	line-height:200%;
+	margin: auto;
+}
+.loginForm input[type="text"]{
+	width:200px;
+}
+.loginForm input[type="password"]{
+	width:200px;
+}

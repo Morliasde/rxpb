@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="rxpbGlobal" extends="struts-default" namespace="/">
+		
+		<action name="login" class="com.rxpb.action.GlobalAction" method="userLogin">
+			<result name="login" type="dispatcher">/Login.jsp</result>
+			<result name="admin" type="redirect">/admin/admin.jsp</result>
+			<result name="judge" type="redirect">/judge/judge.jsp</result>
+			<result name="student" type="redirect">/student/student.jsp</result>
+			<result name="company" type="redirect">/company/company.jsp</result>
+		</action>
+		
+		<action name="logout" class="com.rxpb.action.GlobalAction" method="userLogout">
+			<result name="index" type="redirect">/index.jsp</result>
+		</action>
+		
+		<action name="regist" class="com.rxpb.action.GlobalAction" method="userRegist">
+			<result name="regist" type="dispatcher">/Regist.jsp</result>
+			<result name="login" type="redirect">/Login.jsp</result>
+		</action>
+		
+		<action name="getQualitySort" class="com.rxpb.action.GlobalAction" method="getQualitySort">
+			<result name="QualitySort" type="dispatcher">/global/QualitySort.jsp</result>
+		</action>
+		<action name="getTasteSort" class="com.rxpb.action.GlobalAction" method="getTasteSort">
+			<result name="TasteSort" type="dispatcher">/global/TasteSort.jsp</result>
+		</action>
+		<action name="getFatnessSort" class="com.rxpb.action.GlobalAction" method="getFatnessSort">
+			<result name="FatnessSort" type="dispatcher">/global/FatnessSort.jsp</result>
+		</action>
+		
+		
+	</package>
+
+<package name="rxpbAdmin" extends="struts-default" namespace="/admin">
+		
+		<!-- 用户管理 -->
+		<action name="getUserList" class="com.rxpb.action.AdminAction" method="getUserList">
+			<result name="UserList" type="dispatcher">/admin/UserList.jsp</result>
+		</action>
+		<action name="getDisableUserList" class="com.rxpb.action.AdminAction" method="getDisableUserList">
+			<result name="DisUserList" type="dispatcher">/admin/DisUserList.jsp</result>
+		</action>
+		<action name="deleteUser" class="com.rxpb.action.AdminAction" method="deleteUser">
+			<result name="DisUserList" type="dispatcher">/admin/DisUserList.jsp</result>
+		</action>
+		<action name="disableUser" class="com.rxpb.action.AdminAction" method="disableUser">
+			<result name="UserList" type="dispatcher">/admin/UserList.jsp</result>
+		</action>
+		<action name="enableUser" class="com.rxpb.action.AdminAction" method="enableUser">
+			<result name="DisUserList" type="dispatcher">/admin/DisUserList.jsp</result>
+		</action>
+		<action name="changeUserCompatitionId" class="com.rxpb.action.AdminAction" method="changeUserCompatitionId">
+			<result name="UserList" type="dispatcher">/admin/UserList.jsp</result>
+		</action>
+		<action name="getUserDetail" class="com.rxpb.action.AdminAction"  method="getUserDetail">
+			<result name="UserDetail" type="dispatcher">/admin/UserDetail.jsp</result>
+		</action>
+		<action name="editUser" class="com.rxpb.action.AdminAction"  method="editUser">
+			<result name="UserDetail" type="dispatcher">/admin/UserDetail.jsp</result>
+		</action>
+		
+		<!-- 参选单位管理 -->
+		<action name="getCompanyList" class="com.rxpb.action.AdminAction" method="getCompanyList">
+			<result name="CompanyList" type="dispatcher">/admin/CompanyList.jsp</result>
+		</action>
+		<action name="insertCompany" class="com.rxpb.action.AdminAction" method="insertCompany">
+			<result name="CompanyList" type="dispatcher">/admin/CompanyList.jsp</result>
+		</action>
+		<action name="deleteCompany" class="com.rxpb.action.AdminAction" method="deleteCompany">
+			<result name="CompanyList" type="dispatcher">/admin/CompanyList.jsp</result>
+		</action>
+		<action name="getCompanyDetail" class="com.rxpb.action.AdminAction" method="getCompanyDetail">
+			<result name="CompanyDetail" type="dispatcher">/admin/CompanyDetail.jsp</result>
+		</action>
+		<action name="editCompany" class="com.rxpb.action.AdminAction" method="editCompany">
+			<result name="CompanyDetail" type="dispatcher">/admin/CompanyDetail.jsp</result>
+		</action>
+		<action name="getCompanyScore" class="com.rxpb.action.AdminAction" method="getCompanyScore">
+			<result name="CompanyScore" type="dispatcher">/admin/CompanyScore.jsp</result>
+		</action>
+		
+		<!-- 大赛管理
+		获取当前大赛参数	getCompetitionConfig
+		大赛参数编辑	editCompetition
+		新建大赛（参数）	createCompetition
+		设置当前比赛配置	editConfig
+		生成成绩	createScore
+		生成表格	createExcel
+		生成往届成绩表格	createPreviousExcel 
+		-->
+		<action name="getCompetitionConfig" class="com.rxpb.action.AdminCompetitionAction" method="getCompetitionConfig">
+			<result name="CompetitionDetail" type="dispatcher">/admin/CompetitionDetail.jsp</result>
+		</action>
+		<action name="getCompetitionList" class="com.rxpb.action.AdminCompetitionAction" method="getCompetitionList">
+			<result name="CompetitionList" type="dispatcher">/admin/CompetitionList.jsp</result>
+		</action>
+		<action name="editCompetition" class="com.rxpb.action.AdminCompetitionAction" method="editCompetition">
+			<result name="CompetitionDetail" type="dispatcher">/admin/CompetitionDetail.jsp</result>
+		</action>
+		<action name="createCompetition" class="com.rxpb.action.AdminCompetitionAction" method="createCompetition">
+			<result name="CompetitionDetail" type="dispatcher">/admin/CompetitionDetail.jsp</result>
+		</action>
+		<action name="editConfig" class="com.rxpb.action.AdminCompetitionAction" method="editConfig">
+			<result name="CompetitionDetail" type="dispatcher">/admin/CompetitionDetail.jsp</result>
+		</action>
+		<action name="createScore" class="com.rxpb.action.AdminCompetitionAction" method="createScore">
+			<result name="CompetitionDetail" type="dispatcher">/admin/CompetitionDetail.jsp</result>
+		</action>
+				
+		<!-- 输出excel -->
+		<action name="createExcel" method="createExcel"
+			class="com.rxpb.action.AdminCompetitionAction">
+			<result name="success" type="stream">
+				<param name="contentType">application/vnd.ms-excel</param>
+				<param name="inputName">inputExcel</param>
+				<param name="contentDisposition">attachment;filename="${#request['filename']}"</param>
+				<param name="bufferSize">8192</param>
+			</result>
+			<result name="login" type="dispatcher">/Login.jsp</result>
+		</action> 
+				
+	</package>
+	
+	<package name="rxpbStudent" extends="struts-default" namespace="/student">
+		
+		<!-- 工作人员 -->
+		
+		<!-- 
+		获取组列表	student/getGroupList
+		获取组内蟹数据详情	student/getGroupData
+		添加蟹数目	student/addCrab
+		保存蟹数据	student/saveCrabData
+		删除蟹数据	student/deleteCrab
+			
+		获取组内蟹种质分详情	student/getGroupQuailty
+		保存组内蟹种质分	student/saveGroupQuailty
+		获取组内蟹口感分详情	student/getGroupTaste
+		保存组内蟹口感分	student/saveGroupTaste
+		 -->
+		<action name="getGroupList" class="com.rxpb.action.StudentAction" method="getGroupList">
+			<result name="GroupList" type="dispatcher">/student/GroupList.jsp</result>
+		</action>
+		<action name="getGroupData" class="com.rxpb.action.StudentAction" method="getGroupData">
+			<result name="GroupDetail" type="dispatcher">/student/GroupDetail.jsp</result>
+		</action>
+		<action name="addCrab" class="com.rxpb.action.StudentAction" method="addCrab">
+			<result name="GroupDetail" type="dispatcher">/student/GroupDetail.jsp</result>
+		</action>
+		<action name="saveCrabData" class="com.rxpb.action.StudentAction" method="saveCrabData">
+			<result name="GroupDetail" type="dispatcher">/student/GroupDetail.jsp</result>
+		</action>
+		<action name="deleteCrab" class="com.rxpb.action.StudentAction" method="deleteCrab">
+			<result name="GroupDetail" type="dispatcher">/student/GroupDetail.jsp</result>
+		</action>
+		<action name="getGroupIdByLabel" class="com.rxpb.action.StudentAction" method="getGroupIdByLabel">
+			<result name="SearchLabel" type="dispatcher">/student/SearchLabel.jsp</result>
+		</action>		
+	
+	</package>
+	
+	<package name="rxpbJudge" extends="struts-default" namespace="/judge">	
+	<!-- 
+		获取组列表	judge/getGroupList
+		获取本人组内蟹种质评分	judge/getQualityByJudge
+		保存本人组内蟹种质评分	judge/saveQualityByJudge
+		获取本人组内蟹口感评分	judge/getTasteByJudge
+		保存本人组内蟹口感评分	judge/saveTasteByJudge
+	  -->
+	 	<action name="getGroupList" class="com.rxpb.action.JudgeAction" method="getGroupList">
+			<result name="GroupList" type="dispatcher">/judge/GroupList.jsp</result>
+		</action>
+		<action name="getQualityByJudge" class="com.rxpb.action.JudgeAction" method="getQualityByJudge">
+			<result name="QualityDetail" type="dispatcher">/judge/QualityDetail.jsp</result>
+		</action>		
+		<action name="saveQualityByJudge" class="com.rxpb.action.JudgeAction" method="saveQualityByJudge">
+			<result name="QualityDetail" type="dispatcher">/judge/QualityDetail.jsp</result>
+		</action>
+		<action name="getTasteByJudge" class="com.rxpb.action.JudgeAction" method="getTasteByJudge">
+			<result name="TasteDetail" type="dispatcher">/judge/TasteDetail.jsp</result>
+		</action>		
+		<action name="saveTasteByJudge" class="com.rxpb.action.JudgeAction" method="saveTasteByJudge">
+			<result name="TasteDetail" type="dispatcher">/judge/TasteDetail.jsp</result>
+		</action>
+		
+	</package>
+	
+	<package name="rxpbUser" extends="struts-default" namespace="/user">
+		
+		<!-- 编辑个人信息 -->
+		<action name="getSelfDetail" class="com.rxpb.action.UserAction"  method="getSelfDetail">
+			<result name="SelfDetail" type="dispatcher">/user/SelfDetail.jsp</result>
+		</action>
+		<action name="editSelf" class="com.rxpb.action.UserAction"  method="editSelf">
+			<result name="SelfDetail" type="dispatcher">/user/SelfDetail.jsp</result>
+		</action>
+		</package>
+	
+
+</struts>    

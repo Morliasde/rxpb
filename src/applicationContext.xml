@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+	<!-- 事务管理器 -->
+	<bean id="myHibTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	  <property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 数据库 -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/rxpbdb?useUnicode=true&amp;characterEncoding=utf-8">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value=""></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/rxpb/entity/RxpbUserInfo.hbm.xml</value>
+				<value>
+					com/rxpb/entity/RxpbCompetitionConfig.hbm.xml
+				</value>
+				<value>com/rxpb/entity/RxpbCompanyInfo.hbm.xml</value>
+				<value>
+					com/rxpb/entity/RxpbCompetitionInfo.hbm.xml
+				</value>
+				<value>com/rxpb/entity/RxpbCrabInfo.hbm.xml</value>
+				<value>com/rxpb/entity/RxpbGroupInfo.hbm.xml</value>
+				<value>com/rxpb/entity/RxpbScoreQuality.hbm.xml</value>
+				<value>com/rxpb/entity/RxpbScoreTaste.hbm.xml</value>
+				<value>com/rxpb/entity/RxpbScoreFin.hbm.xml</value></list>
+		</property>
+	</bean>
+	
+	<!-- 依赖注入 -->
+	<!-- Dao -->
+	<bean id="userDao" class="com.rxpb.dao.UserDao">	
+	  <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="companyDao" class="com.rxpb.dao.CompanyDao">	
+	  <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="resultDao" class="com.rxpb.dao.ResultDao">	
+	  <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="competitionDao" class="com.rxpb.dao.CompetitionDao">	
+	  <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="crabDao" class="com.rxpb.dao.CrabDao">	
+	  <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="groupDao" class="com.rxpb.dao.GroupDao">	
+	  <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<bean id="scoreDao" class="com.rxpb.dao.ScoreDao">	
+	  <property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- service -->
+	<bean id="userService" class="com.rxpb.service.UserService">
+	 <property name="userDao" ref="userDao" />
+	</bean>
+	<bean id="companyService" class="com.rxpb.service.CompanyService">
+	 <property name="companyDao" ref="companyDao" />
+	 <property name="groupDao" ref="groupDao" />
+	</bean>
+	<bean id="resultService" class="com.rxpb.service.ResultService">
+	 <property name="groupDao" ref="groupDao" />
+	 <property name="crabDao" ref="crabDao" />
+	 <property name="competitionDao" ref="competitionDao" />
+	 <property name="scoreDao" ref="scoreDao" />
+	 <property name="companyDao" ref="companyDao" />
+	 <property name="resultDao" ref="resultDao" />
+	</bean>
+	<bean id="competitionService" class="com.rxpb.service.CompetitionService">
+	 <property name="competitionDao" ref="competitionDao" />
+	</bean>
+	<bean id="crabService" class="com.rxpb.service.CrabService">
+	 <property name="crabDao" ref="crabDao" />
+	</bean>
+	<bean id="groupService" class="com.rxpb.service.GroupService">
+	 <property name="groupDao" ref="groupDao" />
+	 <property name="crabDao" ref="crabDao" />
+	 <property name="scoreDao" ref="scoreDao" />
+	</bean>
+	
+	<!-- action -->
+	<bean id="globalAction" class="com.rxpb.action.GlobalAction">
+		<property name="userService" ref="userService"></property>	
+	</bean>
+	<bean id="adminAction" class="com.rxpb.action.AdminAction">
+		<property name="userService" ref="userService"></property>	
+		<property name="companyService" ref="companyService"></property>	
+		<property name="competitionService" ref="competitionService"></property>
+	</bean>
+	<bean id="adminCompetitionAction" class="com.rxpb.action.AdminCompetitionAction">
+		<property name="competitionService" ref="competitionService"></property>
+		<property name="resultService" ref="resultService"></property>
+	</bean>
+	<bean id="studentAction" class="com.rxpb.action.StudentAction">
+		<property name="groupService" ref="groupService"></property>
+		<property name="crabService" ref="crabService"></property>
+	</bean>
+	<bean id="judgeAction" class="com.rxpb.action.JudgeAction">
+		<property name="groupService" ref="groupService"></property>
+	</bean>
+	<bean id="userAction" class="com.rxpb.action.UserAction">
+		<property name="userService" ref="userService"></property>	
+	</bean>
+</beans>
